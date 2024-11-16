@@ -1,0 +1,573 @@
+Git and GitHub
+
+VCS: version control system
+SCM: software control system
+DVCS: distributed versions control system
+
+Git: manage all the commits, clone the repositories, create new projects.
+
+
+To receive help about how to use git:
+git help tutorial & git help tutorial-2
+git help everyday
+
+Terms
+	Versions Control System: software that let manage al the changes around the project
+	Working tree: set of nested directories and files that contain the project being worked on.
+	Commit: the new changes or features created by the clone of the main project.
+	Repository: is a directory, a project with an historial. A bare repository is a repository used for storing backups or sharing information, usually this repositories use '.git' extension, for example 'project.git'.
+	Branch: the main version is the master branch, the developers clone the master branch and do the changes before to apply a new change at the main project.
+	Version: 
+	Clone: an exact copy of the repository
+	Fork: a different and new project created by an exist project
+
+
+Characteristics
+	Distributed: all the members of the team have their own repository, don't need internet connection to work, and all the members have a security copy
+	Branch and merge: each member has a branch and when the new changes are already done the developer has to do a merge into the master branch (on merge function). There are the master branch, the dev branch, and the fixes and features branches.
+	Each member will be able to work in their own project at the same like the others (Branches).
+	
+
+Work flow
+	1. Create the repository (Git init: new repository / Git clone: exist repository)
+	2. Every time that the developers make a change they have to commit into the main project, each commit represent a new function, feature, fix or something new or different.
+	3. Stagin area is the union between the dev branch and the master branch, in that space the person in charge has to review and validate the commits, the archives are sending to the Stagin area by the command "git add" and the final commits are sending to the master branch by the command "git commit" and add a comment.
+
+
+Git tools
+	1. Terminal
+	2. Graphic customers: Gitkraken, Sourcetree, GitHub desktop.
+	3. Cloud repositories: GitHub, Bitbucket, Gitlab / remote branch (origin)
+	4.IDEs and editors: VS Code, IntelliJ Idea, Atom 
+
+
+
+GitHub: Git cloud
+Is a public space to share the projects and knowledge with the community and to have access at their repositories too.
+Local (own computer) > Global (user) > System (whole system)
+
+Git areas
+1. Work area (dev branch)
+2. Stagin area 
+3. Repository (master branch)
+
+Repository: is an space or storage when is possible to save and manage files, documents or another type of archives
+
+
+Git configuration and commands
+
+access commands: local, global, system
+
+To set a property like name, alias, email or another
+
+
+git config --global (object.property) user.name "name"
+
+
+To see all the git settings in our machine
+git config --list
+
+
+To see the settings in a specific level (--local, --global, --system)
+git config --global --list
+
+
+To set VS Code with Git
+git config --global core.editor "code --wait"
+
+
+To set the colors
+git config --global color.ui true
+
+
+To set the write shape
+git config --global core.autocrlf true (to Windows)
+git config --global core.autocrlf input (to Linux, Mac or Unix)
+
+
+To create a file
+echo content > "file-name"
+Ex: echo This file is a test > "file-name"
+
+
+To access the documents in the folder in VS Code directly from the terminal
+[In the selected path]
+code .
+
+
+To move into the files/directories
+cd file_name
+
+
+To return to a previous file/directory
+cd ../
+
+
+To create a file/directory
+mkdir dir_name
+
+
+To remove a directory
+rmdir dir_name
+
+
+To create a repository: start and create the necessary archives by the repository 
+git init
+
+
+To initializing a repository and set the initial branch:
+git init --initial-branch=main
+or
+git init -b main
+
+
+To take a look about the file archives
+ls
+
+
+To know the path
+pwd
+
+
+To get into the hide files
+ls -a
+
+
+To know the repository status
+git status
+
+
+
+
+
+Git add and commit
+
+To add an archive or a change at the Stagin area
+git add file_name
+
+
+To remove an archive from the Stagin area or show archives that they are into the work area 
+git rm --cached file_name
+
+
+To do a commit
+git commit -m "Here I write a comment about the changes or new functions or something to describe the commit" -a 
+
+Command '-a' is used to add the modified files
+
+Command '-A' is used to add any file that is not currently tracked by Git to the list of files that Git wants to track
+
+
+To do a commit without go through the Stagin area
+git commit -a
+
+
+To remove a file in the master branch
+1. rm file_name
+2. git add file_name_deleted
+3. git commit -m "comment" -a
+
+
+To restore a file
+git restore file_name
+
+
+To recover a file modification or change done in the last commit (like ctrl + z)
+git checkout file_name
+
+
+To recover changes in the Stagin area
+git reset --hard
+
+
+To change a file name
+git mv original_file_name new_file_name
+
+git add new_file_name
+
+git commit -m "rename the file" -a
+
+
+To remove the unnecessary text in 'git status'
+git status -s or git status --short
+
+
+To show all the modifications in the commit
+git show file_name
+
+
+To see the differences between the Stagin area and the last commit
+git diff --staged
+red: commit
+green: Stagin area
+
+
+To know the data of the person who did the commit 
+git log 
+
+
+To reduce the information (this command provides the commits hashes, with the hash I will be able to compare the commits)
+git log --oneline 
+
+
+To show all the commits from the master branch
+git log --oneline --all
+
+
+To set the hash length
+git config --global core.abbrev # (# = hash length)
+
+
+To compare commits: use the commit ID hash
+git diff hash1 hash2
+
+To know the files name that have changed
+git diff --name-only hash1 hash2
+
+To know the lines that have changed
+git diff --word-diff hash1 hash2
+
+
+
+
+
+Modify and undo a commit
+
+
+Modify
+
+git commit --amend (this command open the document in VS Code to be modified)
+
+To add something new to the commit is necessary add the new files or modifications to the Stagin area and do the commit again with the command 'git commit --amend'
+
+Example: git commit --amend --no-edit
+
+
+To modify a commit that isn't the head commit is necessary reset the commits and rebase them
+
+git rebase -i head-# (the number of the commit) 
+[This command open the # commit to be modified]
+
+git rebase --continue
+[This command bring back the other commits]  
+
+
+
+Undo
+
+First option (work with 'rm file_name'):
+To recover a removed file I use 
+git checkout -- file_name
+or
+git checkout hash .
+
+
+Second option (work with 'git rm file_name'):
+
+Move the pointer to the last HEAD position with
+git reset HEAD file_name
+
+
+To move the head pointer one or more commits use the command
+
+git reset --soft head~# (amount of commits that I want to move)
+
+Place the pointer on the other commit [If I have three commits and execute 'git reset --soft
+hash_number_second_commit', the third commit will be moved to the Stagin area and the new Head commit will be the second]
+
+git reset --soft hash_number
+
+
+Mixed (clean the Stagin area)
+
+
+git reset --hard (remove completely the last commit)
+Take all the documents the were in the commit and moves to the work area, delete all in the Stagin area and delete all in the work area)
+
+git reset --hard hash
+
+
+To revert changes and go back to the last version without do a commit I use
+git revert --no-edit hash
+
+
+
+
+Branches
+A copy of the project to work apart independently (dev branch)
+
+Merge: merge the development branch with the changes made to the master branch
+
+
+Create a branch
+git branch (show the created branches)
+
+
+git branch new_branch_name
+Ex: git branch rama-dev-jorge
+
+
+To move to the branch
+git switch rama-dev-jorge (recommended) / git checkout rama-dev-jorge
+
+
+To move into the branch when it is created
+git switch -c branch-name
+git switch -c rama-dev-jorge
+
+
+Delete a branch
+git branch -d branch-name
+git branch -d rama-dev-jorge
+
+
+Modify the branch name
+[Different branch]
+git branch -m current-name new-name
+
+[Actual branch]
+git branch -m new-name
+
+To see the commits and branches with a guide
+git log-simple
+
+
+Merge branches
+When I do a merge the branches merge with each other
+
+In the master branch*
+
+git merge branch-to-merge
+
+example: 
+Branch to change the master-current code: Dev-branch (with changes)
+
+In the master-branch*
+
+git merge Dev-branch
+
+
+To reset a merge
+
+git reset --hard hash (the hash of the last correct commit)
+
+
+
+
+
+Merge conflicts
+Conflict between branches, isn't a code error
+Git has to decide which version to keep
+
+If I don't merge the branches in the conflict editor I have to use the command
+git merge --continue
+
+
+The merge editor is a Git tool where I can manage and select the changes (commits) that I want to keep, this tool provide many options to pick and change the changes commited.
+
+
+
+
+
+Git ignore (ignore all the files I ordered, provide security and privacy, the ignored files will not be added to the Stagin area)
+
+
+To know the documents in one commit
+git ls-tree -r --name-only hash
+
+
+To ignore a file
+Create a file with the extension .gitignore and write into the document the extensions or names of the archives, documents or files to ignore
+
+
+Example: into the file .gitignore
+*.txt [ignore all the documents with the extension .txt]
+Example: *.txt
+Is possible to select some documents or files with any pattern
+Example: *copy.txt [all the documents that end with copy.txt will be ignored]
+
+
+To non ignore a file ( ! ) 
+!file_name
+Example: !readme.txt
+
+
+To ignore a complete directory ( / )
+dir_name/
+Example: images/
+
+
+To non ignore a specific document into a directory
+!dir_name/doc_name
+Example: !images/background.png
+
+
+To set a git ignore global and apply this setting to all the files
+First, into the main file (the first in the path) is necessary to create a document .gitignore, in this document I write the specifications of the files to ignore, I could modify this document later
+
+Second, in the bash I set this config:
+git config --global core.excludesfile path_of_the_gitignore_document
+
+Now every time I commit something the documents with the specifications will be ignored
+
+
+
+
+
+Git alias
+Save a command into an alias (used with long commands)
+
+git config --global alias.alias_name "command-to-save"
+Example: git config --global alias.log-boosted "command"
+
+To execute the alias
+git alias_name
+Example: git log-boosted
+
+
+
+
+
+Git reflog (reference record)
+
+Commits record
+Command git reflog shows all the commits record and provide all the hashes, this command is useful to review the hashes and the old commits if is necessary to get back something in specific
+
+
+
+
+
+
+
+
+
+
+GitHub
+Create and set up repository
+
+Can be public or private, always add the README document, use camel-case and write all in lower case, licenses are important (copywrite)
+
+Deactivate releases and packages
+
+Add topics based on the nature of the project
+
+Add the files in a structured way, separate each archive and describe each one simple but in detail
+
+
+
+
+
+Clone and Sync remote repositories
+
+When I clone a repository I get all the information, commits record, changes...
+
+
+To clone a repository
+Code - 
+Copy the HTTPS or SSH - 
+Git bash - git clone HTTPS or SSH
+
+
+Git Push (add changes to the server)
+Review the name and email-
+git push repo-name (commonly origin) branch
+Example: git push origin master-
+Use a token: on GitHub - settings - developer settings - personal access tokens - tokens (classic) - set the expiration time - select the scopes - generate token
+
+
+
+Git Pull (update the changes in the main server/git fetch + git merge)
+git pull
+Or
+git pull origin master
+
+
+
+Git Fetch (to see the changes)
+git fetch
+
+Move to another branch 
+git switch --detach origin/master
+
+
+
+
+
+Migrate local repository
+git remote (let adding remote repositories, changing names, modify set ups)
+
+To migrate the repository first I have to copy the first line and paste it in the bash
+
+Example: git remote add origin https://github.com/JorgeVilla1998/New-repo.git
+
+
+Next I copy and paste the second line
+Example: git branch -M main
+
+
+Finally I have to copy and paste the third line, this line set the branch where I will push the changes
+Example: git push -u origin main
+
+'-u' is the abbreviate command to set the branch
+'-u' == '--set-upstream'
+
+With the command 'git remote -v' I look all the possible actions that I would do with the new repository
+
+
+
+
+
+Forks
+Fork(clone/duplicate a remote repository from GitHub into the local repository (my GitHub account) and replace the migrate process)
+
+
+
+
+
+
+Pull Requests (contributions)
+Make a request to add changes to someone else's repository
+
+
+
+
+
+GitHub Issues
+Tasks/tickets to resolve or changes to make
+-Labels: tickets to describe the issue
+-Milestones: space to aggroup the issues like categories 
+
+After close an issue is important to let a comment to indicate and describe the solution/changes or another thing
+
+
+
+
+
+Tips to use Git better*
+-Add and set up a 'gitignore' document
+-Create a branch for a specific purpose, only one at a time
+-Descriptive names (using kebab-case)
+-Do local tests (each time that I do a change in a dev-branch I have to merge that branch to my repository (the clone of the main repository) and test it to ensure that all is OK, then I do a pull request)
+-Don't work in the main-branch (master)
+-Commits must be significant and clear
+-Keep the repositories updated
+-Keep the record clean 
+-Use tags in the commits  
+
+
+
+
+
+Next steps
+-Git Stash (allows saving changes that are not committed), git stash pop
+-Git Cherry-Pick (merge an exact commit into another branch)
+-Milestone
+-Tags
+-Rebase
+-Squash (Combine many commits into one)
+-Sub-modules (combine repositories)
+-Git Hooks (execute a code in a specific moment)
+-Git Bisect (useful to find a bug/error/mistake), Git Bisect Reset
+-Git Flow / GitHub Flow
+
+
